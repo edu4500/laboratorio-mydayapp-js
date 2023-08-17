@@ -28,6 +28,7 @@ export const todoListView = (item,stogare) => {
 export const addItenTodoView = (todoList,element,stogare) => {
     let newEle = tareaItemView(element)
     let checkbox = newEle.getElementsByClassName('toggle')[0]
+    let edit = newEle.getElementsByClassName('edit')[0]
     checkbox.onclick = function(){
         if(checkbox.checked){
             element.completed = "completed";
@@ -40,8 +41,16 @@ export const addItenTodoView = (todoList,element,stogare) => {
     }
     newEle.ondblclick = function(){
         newEle.setAttribute('class','editing')
-        let edit = newEle.getElementsByClassName('edit')[0]
+        edit.focus()
         edit.value = element.title;
     }
+    edit.addEventListener('keyup',(e)=>{
+        if(e.key == 'Enter'){
+            element.title = edit.value
+            stogare.updateTitle(element)
+            newEle.removeAttribute('class')
+            newEle.getElementsByTagName('label')[0].innerText = edit.value
+        }
+    })
     todoList.appendChild(newEle)
 }

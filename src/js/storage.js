@@ -24,10 +24,17 @@ export const Storage = () => {
         localStorage.setItem(TABLE,JSON.stringify(memoryTareas));
     }
 
+    let updateTitle = (item)=>{
+        let update = memoryTareas.find(t => t.id === item.id);
+        update.completed = item.title;
+        localStorage.setItem(TABLE,JSON.stringify(memoryTareas));
+    } 
+
     return {
         memoryTareas,
         length,
         addTarea,
-        changeState
+        changeState,
+        updateTitle
     }
 }
