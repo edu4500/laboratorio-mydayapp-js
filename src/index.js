@@ -1,17 +1,22 @@
 import "./css/base.css";
 
-import { sayHello,Util } from "./js/utils";
+import { main,footer,newTodo,Tarea } from "./js/utils";
 import { Storage } from "./js/storage";
 
 (function (){
   let _storage = new Storage();
-  let _util = new util();
-  console.log(sayHello("Hello"));
-  debugger
-  if(_storage.length==0){
-    _util.hiddenMain();
-    _util.hiddenFooter();
+  if(_storage.length()==0){
+    main.setAttribute("hidden","hidden")
+    footer.setAttribute("hidden","hidden")
   }
+  newTodo.addEventListener('keyup',(event)=>{
+    if(event.key == 'Enter'){
+      let value = newTodo.value.trim();
+      _storage.addTarea(new Tarea(value))
+      newTodo.value = "";
+    }
+  })
+
 })();
 
 
