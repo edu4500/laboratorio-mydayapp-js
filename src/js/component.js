@@ -14,7 +14,11 @@ export const tareaItemView = (itemTarea) => {
 
 export const todoListView = (item,list) => {
     list.forEach(element => {
-        let newEle = tareaItemView(element)
-        item.appendChild(newEle)
+        addItenTodoView(item,element)
     });
+}
+
+export const addItenTodoView = (todoList,element) => {
+    let newEle = tareaItemView(element)
+    todoList.appendChild(newEle)
 }

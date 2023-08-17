@@ -3,7 +3,7 @@ import "./css/base.css";
 import { main,footer,newTodo,todoList } from "./js/names";
 import { Storage } from "./js/storage";
 import { Tarea } from "./js/models";
-import { todoListView } from "./js/component";
+import { todoListView,addItenTodoView } from "./js/component";
 
 
 
@@ -24,11 +24,11 @@ import { todoListView } from "./js/component";
   newTodo.addEventListener('keyup',(event)=>{
     if(event.key == 'Enter'){
       let value = newTodo.value.trim();
-      _storage.addTarea(new Tarea(value))
+      let tarea = new Tarea(value)
+      _storage.addTarea(tarea)
       newTodo.value = "";
       visibleListTareas()
-      
-      // todoList.appendChild(nuevo)
+      addItenTodoView(todoList,tarea)
     }
   })
 })();
