@@ -2,14 +2,9 @@ export const sayHello = (text) => {
   return text;
 };
 
-export const main = document.getElementsByClassName("main")[0];
-export const footer = document.getElementsByClassName("footer")[0];
-export const newTodo = document.getElementsByClassName("new-todo")[0];
-
-export const Tarea = (title) => {
-  return ({
-    id:"1234",
-    title,
-    completed:"pending"
-  })
+export function uuidv4() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
 }
+
