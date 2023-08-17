@@ -4,7 +4,6 @@ export const Storage = () => {
 
     let getElemntos = () => {
         let tareas = localStorage.getItem(TABLE);
-        console.log(tareas)
         return tareas == null ? [] : JSON.parse(tareas);
     }
     
