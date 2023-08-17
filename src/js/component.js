@@ -48,8 +48,10 @@ export const addItenTodoView = (todoList,element,stogare) => {
         if(e.key == 'Enter'){
             element.title = edit.value
             stogare.updateTitle(element)
+            newEle.getElementsByTagName('label')[0].innerText = edit.value.trim()
+        }
+        else if(e.key == 'Escape'){
             newEle.removeAttribute('class')
-            newEle.getElementsByTagName('label')[0].innerText = edit.value
         }
     })
     todoList.appendChild(newEle)
