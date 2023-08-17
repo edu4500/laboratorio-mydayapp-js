@@ -3,11 +3,9 @@ const TABLE = "TAREAS";
 export const Storage = () => {
 
     let getElemntos = () => {
-        // let strTareas = localStorage.getItem(TABLE);
-        // let tareas = JSON.stringify(strTareas);
         let tareas = localStorage.getItem(TABLE);
         console.log(tareas)
-        return tareas == null ? [] : tareas;
+        return tareas == null ? [] : JSON.parse(tareas);
     }
     
     let memoryTareas = getElemntos();
@@ -18,7 +16,7 @@ export const Storage = () => {
 
     let addTarea = (item)=>{
         memoryTareas.push(item);
-        localStorage.setItem(TABLE,memoryTareas);
+        localStorage.setItem(TABLE,JSON.stringify(memoryTareas));
     }
 
     return {

@@ -1,7 +1,8 @@
 import "./css/base.css";
 
-import { main,footer,newTodo,Tarea } from "./js/utils";
+import { main,footer,newTodo } from "./js/names";
 import { Storage } from "./js/storage";
+import { Tarea } from "./js/models";
 
 (function (){
   let _storage = new Storage();
