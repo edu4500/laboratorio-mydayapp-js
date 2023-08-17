@@ -1,9 +1,9 @@
 import "./css/base.css";
 
-import { main,footer,newTodo } from "./js/names";
+import { main,footer,newTodo,todoList } from "./js/names";
 import { Storage } from "./js/storage";
 import { Tarea } from "./js/models";
-
+import { todoListView } from "./js/component";
 
 
 
@@ -19,12 +19,16 @@ import { Tarea } from "./js/models";
     }
   }
   visibleListTareas()
+  
+  todoListView(todoList,_storage.memoryTareas)
   newTodo.addEventListener('keyup',(event)=>{
     if(event.key == 'Enter'){
       let value = newTodo.value.trim();
       _storage.addTarea(new Tarea(value))
       newTodo.value = "";
       visibleListTareas()
+      
+      // todoList.appendChild(nuevo)
     }
   })
 })();
