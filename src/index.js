@@ -18,15 +18,8 @@ import { todoListView,addItenTodoView } from "./js/component";
       footer.removeAttribute("hidden")
     }
   }
-  function onClickCheckBox(checkbox,element){
-    if(checkbox.checked){
-        element.completed = "completed";
-    }else{
-        element.completed = "pending";
-    }
-}
   visibleListTareas()
-  todoListView(todoList,_storage.memoryTareas,onClickCheckBox)
+  todoListView(todoList,_storage)
   newTodo.addEventListener('keyup',(event)=>{
     if(event.key == 'Enter'){
       let value = newTodo.value.trim();
@@ -34,7 +27,8 @@ import { todoListView,addItenTodoView } from "./js/component";
       _storage.addTarea(tarea)
       newTodo.value = "";
       visibleListTareas()
-      addItenTodoView(todoList,tarea,onClickCheckBox)
+      addItenTodoView(todoList,tarea)
+      console.log(_storage)
     }
   })
   
