@@ -1,6 +1,6 @@
 import "./css/base.css";
 
-import { main,footer,newTodo,todoList,todoCount } from "./js/names";
+import { main,footer,newTodo,todoList,todoCount,clearCompleted } from "./js/names";
 import { Storage } from "./js/storage";
 import { Tarea } from "./js/models";
 import { todoListView,addItenTodoView } from "./js/component";
@@ -36,8 +36,13 @@ import { todoListView,addItenTodoView } from "./js/component";
       addItenTodoView(todoList,tarea)
     }
   })
-  
-  
+  clearCompleted.addEventListener('click',function (e){
+    _storage.elimarTodasTareas();
+    let listCompleted = todoList.getElementsByClassName("completed");
+    for (let item of Array.from(listCompleted)) {
+      item.remove()
+    }
+  })
 
 })();
 
