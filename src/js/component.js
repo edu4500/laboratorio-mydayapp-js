@@ -1,4 +1,4 @@
-
+import { todoCount } from "./names";
 
 export const tareaItemView = (itemTarea) => {
     let nuevo = document.createElement(`li`);
@@ -37,6 +37,7 @@ export const addItenTodoView = (todoList,element,stogare) => {
             element.completed = "pending";
             newEle.removeAttribute('class')
         }
+        todoCount.dispatchEvent(new Event('count'))
         stogare.changeState(element)
     }
     newEle.ondblclick = function(){
@@ -49,6 +50,7 @@ export const addItenTodoView = (todoList,element,stogare) => {
             element.title = edit.value
             stogare.updateTitle(element)
             newEle.getElementsByTagName('label')[0].innerText = edit.value.trim()
+            todoCount.dispatchEvent(new Event('count'))
         }
         else if(e.key == 'Escape'){
             newEle.removeAttribute('class')

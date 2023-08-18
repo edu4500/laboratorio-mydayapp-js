@@ -13,6 +13,10 @@ export const Storage = () => {
         return memoryTareas.length;
     };
 
+    let pendingLength = () => {
+        return memoryTareas.filter(t => t.completed == 'pending').length
+    }
+
     let addTarea = (item)=>{
         memoryTareas.push(item);
         localStorage.setItem(TABLE,JSON.stringify(memoryTareas));
@@ -33,6 +37,7 @@ export const Storage = () => {
     return {
         memoryTareas,
         length,
+        pendingLength,
         addTarea,
         changeState,
         updateTitle

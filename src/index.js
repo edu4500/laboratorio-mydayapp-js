@@ -1,6 +1,6 @@
 import "./css/base.css";
 
-import { main,footer,newTodo,todoList } from "./js/names";
+import { main,footer,newTodo,todoList,todoCount } from "./js/names";
 import { Storage } from "./js/storage";
 import { Tarea } from "./js/models";
 import { todoListView,addItenTodoView } from "./js/component";
@@ -9,6 +9,11 @@ import { todoListView,addItenTodoView } from "./js/component";
 
 (function (){
   let _storage = new Storage();
+  todoCount.addEventListener('count',(e)=>{
+    let pendingLength = _storage.pendingLength().toString()
+    let plural = pendingLength == 1 ? '':'s';
+    todoCount.innerHTML = `<strong>${pendingLength}</strong> item${plural} `
+  })
   function visibleListTareas(){
     if(_storage.length()==0){
       main.setAttribute("hidden","hidden")
@@ -16,6 +21,7 @@ import { todoListView,addItenTodoView } from "./js/component";
     }else{
       main.removeAttribute("hidden")
       footer.removeAttribute("hidden")
+      todoCount.dispatchEvent(new Event('count'))
     }
   }
   visibleListTareas()
@@ -28,9 +34,9 @@ import { todoListView,addItenTodoView } from "./js/component";
       newTodo.value = "";
       visibleListTareas()
       addItenTodoView(todoList,tarea)
-      console.log(_storage)
     }
   })
+  
   
 
 })();
