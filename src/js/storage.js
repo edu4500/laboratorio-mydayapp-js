@@ -1,5 +1,5 @@
 
-const TABLE = "TAREAS";
+const TABLE = "mydayapp-js";
 export const Storage = () => {
 
     let getElemntos = () => {
@@ -32,7 +32,12 @@ export const Storage = () => {
         let update = memoryTareas.find(t => t.id === item.id);
         update.completed = item.title;
         localStorage.setItem(TABLE,JSON.stringify(memoryTareas));
-    } 
+    }
+
+    let elimarTodasTareas = ()=>{
+        memoryTareas = memoryTareas.filter(t => t.completed == 'pending')
+        localStorage.setItem(TABLE,JSON.stringify(memoryTareas));
+    }
 
     return {
         memoryTareas,
@@ -40,6 +45,7 @@ export const Storage = () => {
         pendingLength,
         addTarea,
         changeState,
-        updateTitle
+        updateTitle,
+        elimarTodasTareas
     }
 }
