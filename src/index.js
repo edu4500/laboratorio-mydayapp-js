@@ -5,7 +5,16 @@ import { sayHello } from "./js/utils";
 sayHello('hello')
 
 var topID = 0;
-var TodoList = []
+var TodoList = getLocalStorage()
+
+
+function getLocalStorage(){
+    return JSON.parse(localStorage.getItem('mydayapp-js')) || []
+}
+
+function guardarLocalStorage(){
+    localStorage.setItem('mydayapp-js',JSON.stringify(TodoList))
+}
 
 function showElement(){
     if(TodoList.length == 0){
@@ -14,12 +23,17 @@ function showElement(){
     }else{
         document.getElementById('main').removeAttribute('hidden')
         document.getElementById('footer').removeAttribute('hidden')
+        
     }
 }
 
 function render(){
     showElement()
     pintarTodoCount()
+    TodoList.forEach(item => {
+        let nodo = createTodoItem(item)
+        document.getElementById('todo-list').appendChild(nodo)
+    })
 }
 
 function createTodoItem(t){
@@ -93,6 +107,7 @@ function pintarTodoCount(){
     })
     var plural = numero==1?'':'s'
     todoCount.innerHTML = `<strong id="count">${numero}</strong> item left${plural}`;
+    guardarLocalStorage()
 }
 
 document.getElementById('new-todo').addEventListener('keyup',(event)=>{
@@ -114,7 +129,7 @@ document.getElementById('new-todo').addEventListener('keyup',(event)=>{
 document.getElementById('clear-completed').addEventListener('click',(e)=>{
     var ulTodoList = document.getElementById('todo-list').children
     
-    for (let task of ulTodoList) {
+    for (let task of Array.from(ulTodoList)) {
         let checkbox = task.getElementsByClassName('toggle')[0];
         if(checkbox.checked) task.remove();
     }
@@ -122,5 +137,7 @@ document.getElementById('clear-completed').addEventListener('click',(e)=>{
 
     TodoList = TodoList.filter(t => t.completed == false)
 })
+
+
 
 render();
